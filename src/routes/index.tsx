@@ -1,24 +1,78 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { PageShell } from "@/components/PageShell";
+import meAsset from "@/assets/me.png.asset.json";
+import sanjiAsset from "@/assets/sanji.jpg.asset.json";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Aditya — Portfolio" },
+      { name: "description", content: "Hi, I'm Aditya — an 18-year-old engineering student curious about backend, ML and beautiful UI." },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const [showReal, setShowReal] = useState(false);
+  const avatar = showReal ? meAsset.url : sanjiAsset.url;
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <PageShell>
+      {/* decorative flourish */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+        className="pointer-events-none absolute right-6 top-24 hidden text-8xl text-accent md:block"
+        aria-hidden
+      >
+        ✦
+      </motion.div>
+
+      <div className="max-w-3xl">
+        <p className="mb-4 font-hand text-2xl text-muted-foreground">hello there,</p>
+        <h1 className="font-display text-4xl leading-[1.15] md:text-6xl">
+          My name is{" "}
+          <button
+            onClick={() => setShowReal((s) => !s)}
+            className="group inline-flex items-center gap-2 align-middle"
+            aria-label="Toggle avatar"
+          >
+            <motion.img
+              key={avatar}
+              src={avatar}
+              alt="Aditya"
+              width={64}
+              height={64}
+              initial={{ scale: 0.4, rotate: -25, opacity: 0 }}
+              animate={{ scale: 1, rotate: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              className="inline-block h-12 w-12 rounded-full border-2 border-ink object-cover shadow-md md:h-16 md:w-16"
+            />
+          </button>{" "}
+          <span className="italic">Aditya</span>. I'm an{" "}
+          <span className="highlight-marker">18-year-old engineering student</span>, Minecraft veteran{" "}
+          <span className="text-muted-foreground">(10+ yrs)</span>, and a curious mind deep into{" "}
+          <span className="highlight-marker">backend</span> &{" "}
+          <span className="highlight-marker">ML</span>. I love crafting responsive UI/UX too.
+        </h1>
+
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          Outside of studying — anime, video games, music, or roaming down to some mountain 🏔️.
+          Currently balancing academics, code, and the never-ending anime bucket list.
+        </p>
+
+        <div className="mt-8 flex flex-wrap items-center gap-6 text-sm">
+          <Link to="/projects" className="ink-underline font-medium">See my projects →</Link>
+          <Link to="/contact" className="ink-underline text-muted-foreground">Get in touch</Link>
+          <span className="ml-auto hidden text-xs text-muted-foreground md:inline">
+            psst — tap the face
+          </span>
+        </div>
+      </div>
+    </PageShell>
   );
 }
