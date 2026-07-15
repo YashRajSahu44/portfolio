@@ -16,7 +16,7 @@ export function Navbar() {
   return (
     <header className="relative z-40 flex items-center justify-between px-8 py-6 md:px-14">
       <Link to="/" className="font-display text-2xl italic tracking-tight">
-        Aditya<span className="text-accent">.</span>
+        Yash<span className="text-accent">.</span>
       </Link>
       <nav className="hidden items-center gap-7 md:flex">
         {links.map((l) => (

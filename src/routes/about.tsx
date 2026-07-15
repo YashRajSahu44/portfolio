@@ -3,7 +3,7 @@ import { PageShell, PageTitle } from "@/components/PageShell";
 import meAsset from "@/assets/me.png.asset.json";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About — Aditya" }, { name: "description", content: "About Aditya." }] }),
+  head: () => ({ meta: [{ title: "About — Yash" }, { name: "description", content: "About Yash." }] }),
   component: About,
 });
 
@@ -14,7 +14,7 @@ function About() {
       <div className="grid gap-10 md:grid-cols-[220px_1fr] md:items-start">
         <img
           src={meAsset.url}
-          alt="Aditya"
+          alt="Yash"
           className="h-52 w-52 rounded-2xl border-2 border-ink object-cover shadow-lg"
           loading="lazy"
         />

@@ -4,12 +4,13 @@ import { motion } from "motion/react";
 import { PageShell } from "@/components/PageShell";
 import meAsset from "@/assets/me.png.asset.json";
 import sanjiAsset from "@/assets/sanji.jpg.asset.json";
+import handsImg from "@/assets/hands.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aditya — Portfolio" },
-      { name: "description", content: "Hi, I'm Aditya — an 18-year-old engineering student curious about backend, ML and beautiful UI." },
+      { title: "Yash — Portfolio" },
+      { name: "description", content: "Hi, I'm Yash — an 18-year-old engineering student curious about backend, ML and beautiful UI." },
     ],
   }),
   component: Home,
@@ -21,16 +22,18 @@ function Home() {
 
   return (
     <PageShell>
-      {/* decorative flourish */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-        className="pointer-events-none absolute right-6 top-24 hidden text-8xl md:block"
+      {/* reaching hands — Creation of Adam style flourish */}
+      <motion.img
+        src={handsImg}
+        alt=""
         aria-hidden
-      >
-        🤝
-      </motion.div>
+        width={1600}
+        height={704}
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, duration: 0.9, ease: "easeOut" }}
+        className="mx-auto mb-6 block h-auto w-full max-w-3xl select-none dark:invert"
+      />
 
       <div className="max-w-3xl">
         <p className="mb-4 font-hand text-2xl text-muted-foreground">hello there,</p>
@@ -44,7 +47,7 @@ function Home() {
             <motion.img
               key={avatar}
               src={avatar}
-              alt="Aditya"
+              alt="Yash"
               width={64}
               height={64}
               initial={{ scale: 0.4, rotate: -25, opacity: 0 }}
@@ -53,7 +56,7 @@ function Home() {
               className="inline-block h-12 w-12 rounded-full border-2 border-ink object-cover shadow-md md:h-16 md:w-16"
             />
           </button>{" "}
-          <span className="italic">Aditya</span>. I'm an{" "}
+          <span className="italic">Yash</span>. I'm an{" "}
           <span className="highlight-marker">18-year-old engineering student</span>, Minecraft veteran{" "}
           <span className="text-muted-foreground">(10+ yrs)</span>, and a curious mind deep into{" "}
           <span className="highlight-marker">backend</span> &{" "}

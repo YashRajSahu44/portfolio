@@ -3,7 +3,7 @@ import { Github, Mail, Linkedin } from "lucide-react";
 import { PageShell, PageTitle } from "@/components/PageShell";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact — Aditya" }] }),
+  head: () => ({ meta: [{ title: "Contact — Yash" }] }),
   component: Contact,
 });
 
