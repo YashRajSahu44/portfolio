@@ -105,6 +105,7 @@ function RootComponent() {
           <MobileNav />
           <AnimatedOutlet />
           <ThemeTransition />
+          <ClickSounds />
         </div>
       </ThemeProvider>
     </QueryClientProvider>
