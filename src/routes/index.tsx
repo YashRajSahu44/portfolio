@@ -1,46 +1,66 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { PageShell } from "@/components/PageShell";
 import meAsset from "@/assets/me.png.asset.json";
 import sanjiAsset from "@/assets/sanji.jpg.asset.json";
-import handsImg from "@/assets/hands.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Yash — Portfolio" },
-      { name: "description", content: "Hi, I'm Yash — an 18-year-old engineering student curious about backend, ML and beautiful UI." },
+      {
+        name: "description",
+        content:
+          "Hi, I'm Yash — an 18-year-old engineering student curious about backend, ML and beautiful UI.",
+      },
     ],
   }),
   component: Home,
 });
 
+function playPop() {
+  try {
+    const AC =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new AC();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "triangle";
+    o.frequency.setValueAtTime(180, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(720, ctx.currentTime + 0.09);
+    g.gain.setValueAtTime(0.0001, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22);
+    o.connect(g).connect(ctx.destination);
+    o.start();
+    o.stop(ctx.currentTime + 0.24);
+    o.onended = () => ctx.close();
+  } catch {
+    /* no-op */
+  }
+}
+
 function Home() {
   const [showReal, setShowReal] = useState(false);
   const avatar = showReal ? meAsset.url : sanjiAsset.url;
+  const toggledOnce = useRef(false);
+
+  const onToggle = () => {
+    playPop();
+    toggledOnce.current = true;
+    setShowReal((s) => !s);
+  };
 
   return (
     <PageShell>
-      {/* reaching hands — Creation of Adam style flourish */}
-      <motion.img
-        src={handsImg}
-        alt=""
-        aria-hidden
-        width={1600}
-        height={704}
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.9, ease: "easeOut" }}
-        className="mx-auto mb-6 block h-auto w-full max-w-3xl select-none dark:invert"
-      />
-
       <div className="max-w-3xl">
         <p className="mb-4 font-hand text-2xl text-muted-foreground">hello there,</p>
         <h1 className="font-display text-4xl leading-[1.15] md:text-6xl">
           My name is{" "}
           <button
-            onClick={() => setShowReal((s) => !s)}
+            onClick={onToggle}
             className="group inline-flex items-center gap-2 align-middle"
             aria-label="Toggle avatar"
           >
@@ -57,20 +77,30 @@ function Home() {
             />
           </button>{" "}
           <span className="italic">Yash</span>. I'm an{" "}
-          <span className="highlight-marker">18-year-old engineering student</span>, Minecraft veteran{" "}
-          <span className="text-muted-foreground">(10+ yrs)</span>, and a curious mind deep into{" "}
-          <span className="highlight-marker">backend</span> &{" "}
+          <span className="highlight-marker">18-year-old engineering student</span>, a Minecraft
+          veteran <span className="text-muted-foreground">(10+ yrs)</span>, and a curious mind deep
+          into <span className="highlight-marker">backend</span> &{" "}
           <span className="highlight-marker">ML</span>. I love crafting responsive UI/UX too.
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Outside of studying — anime, video games, music, or roaming down to some mountain 🏔️.
-          Currently balancing academics, code, and the never-ending anime bucket list.
-        </p>
+        <div className="mt-8 space-y-5 text-base leading-relaxed text-foreground md:text-lg">
+          <p>
+            Outside of studying, I love watching anime, playing video games, listening to music, or
+            maybe roaming down to some mountain (yeah, I love mountains 🏔️). Currently balancing
+            academics, programming, and in the meantime completing my bucket list of animes.
+          </p>
+          <p className="font-hand text-2xl text-accent">
+            I'm open to new roles, collaborations, and opportunities — feel free to reach out!
+          </p>
+        </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-6 text-sm">
-          <Link to="/projects" className="ink-underline font-medium">See my projects →</Link>
-          <Link to="/contact" className="ink-underline text-muted-foreground">Get in touch</Link>
+          <Link to="/projects" className="ink-underline font-medium">
+            See my projects →
+          </Link>
+          <Link to="/contact" className="ink-underline text-muted-foreground">
+            Get in touch
+          </Link>
           <span className="ml-auto hidden text-xs text-muted-foreground md:inline">
             psst — tap the face
           </span>
