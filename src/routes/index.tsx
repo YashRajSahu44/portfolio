@@ -19,36 +19,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-function playPop() {
-  try {
-    const AC =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    const ctx = new AC();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "triangle";
-    o.frequency.setValueAtTime(180, ctx.currentTime);
-    o.frequency.exponentialRampToValueAtTime(720, ctx.currentTime + 0.09);
-    g.gain.setValueAtTime(0.0001, ctx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22);
-    o.connect(g).connect(ctx.destination);
-    o.start();
-    o.stop(ctx.currentTime + 0.24);
-    o.onended = () => ctx.close();
-  } catch {
-    /* no-op */
-  }
-}
-
 function Home() {
   const [showReal, setShowReal] = useState(false);
   const avatar = showReal ? meAsset.url : sanjiAsset.url;
   const toggledOnce = useRef(false);
 
   const onToggle = () => {
-    playPop();
     toggledOnce.current = true;
     setShowReal((s) => !s);
   };

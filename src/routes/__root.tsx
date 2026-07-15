@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/lib/theme";
 import { Navbar, MobileNav } from "@/components/Navbar";
 import { ThemeTransition } from "@/components/ThemeTransition";
+import { ClickSounds } from "@/components/ClickSounds";
 
 function NotFoundComponent() {
   return (
@@ -104,6 +105,7 @@ function RootComponent() {
           <MobileNav />
           <AnimatedOutlet />
           <ThemeTransition />
+          <ClickSounds />
         </div>
       </ThemeProvider>
     </QueryClientProvider>
