@@ -26,10 +26,10 @@ function Home() {
         initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-        className="pointer-events-none absolute right-6 top-24 hidden text-8xl text-accent md:block"
+        className="pointer-events-none absolute right-6 top-24 hidden text-8xl md:block"
         aria-hidden
       >
-        ✦
+        🤝
       </motion.div>
 
       <div className="max-w-3xl">
