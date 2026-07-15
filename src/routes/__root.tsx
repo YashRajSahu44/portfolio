@@ -50,9 +50,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aditya — Engineering student, backend & ML curious" },
-      { name: "description", content: "Personal portfolio of Aditya — projects, experience, skills and more." },
-      { property: "og:title", content: "Aditya — Portfolio" },
+      { title: "Yash — Engineering student, backend & ML curious" },
+      { name: "description", content: "Personal portfolio of Yash — projects, experience, skills and more." },
+      { property: "og:title", content: "Yash — Portfolio" },
       { property: "og:description", content: "Engineering student building backend, ML and beautiful UI." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

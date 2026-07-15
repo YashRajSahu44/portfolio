@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { PageShell, PageTitle } from "@/components/PageShell";
 
 export const Route = createFileRoute("/projects")({
-  head: () => ({ meta: [{ title: "Projects — Aditya" }] }),
+  head: () => ({ meta: [{ title: "Projects — Yash" }] }),
   component: Projects,
 });
 
