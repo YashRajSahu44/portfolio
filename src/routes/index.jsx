@@ -59,9 +59,9 @@ function Home() {
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-foreground md:text-lg">
           <p>
-            Outside of studying, I love watching anime, playing video games, listening to music, or
-            maybe roaming down to some mountain (yeah, I love mountains 🏔️). Currently balancing
-            academics, programming, and in the meantime completing my bucket list of animes.
+             Building scalable frontend systems
+             and modern web experiences
+             with a strong focus on performance-focused engineering
           </p>
           <p className="font-hand text-2xl text-accent">
             I'm open to new roles, collaborations, and opportunities — feel free to reach out!
