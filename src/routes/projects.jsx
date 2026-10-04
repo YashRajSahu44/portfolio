@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ExternalLink, Github } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 import { PageShell, PageTitle } from "@/components/PageShell";
 
 export const Route = createFileRoute("/projects")({
@@ -11,130 +11,145 @@ export const Route = createFileRoute("/projects")({
 const projects = [
   {
     name: "SmartCampus",
-    tag: "Campus marketplace",
-    description: [
-      "Developed a scalable in-campus marketplace platform for educational institutions.",
-      "Streamlined resource allocation and marketplace management for students.",
-      "Enabled efficient communication and digital services within the campus ecosystem.",
-      "Designed the platform to improve accessibility, resource utilization, and student interaction.",
-    ],
+    description:
+      "A scalable in-campus marketplace for educational institutions, streamlining resource allocation, student communication, and digital campus services.",
     stack: ["React", "Express", "MongoDB"],
+    preview: {
+      type: "image",
+      src: "/smartcampus-preview.png",
+      alt: "SmartCampus marketplace homepage",
+    },
     githubUrl: "https://github.com/YashRajSahu44/Swaply",
-    liveUrl: "n3xtg3n.xyz/",
+    liveUrl: "https://n3xtg3n.xyz/",
   },
   {
     name: "Doomy",
-    tag: "Browser extension",
-    description: [
-      "Developed a Chrome extension that blocks distracting Reels and Shorts on YouTube and Instagram.",
-      "Built a React-based interface to manage platform blocking preferences.",
-      "Implemented automatic detection and blocking of short-form content.",
-    ],
+    description:
+      "A Chrome extension that helps block distracting Reels and Shorts on YouTube and Instagram, with a React interface for managing preferences.",
     stack: ["React", "Manifest V3"],
+    preview: {
+      type: "video",
+      src: "/FocuSee%20Project%202026-10-01%2023-41-55.mp4",
+      label: "Doomy demo video",
+    },
     githubUrl: "https://github.com/YashRajSahu44/doomy",
     liveUrl: "https://github.com/YashRajSahu44/doomy",
   },
   {
-    name: "Personal Portfolio Website",
-    tag: "Web",
-    description: [
-      "Developed and deployed a responsive personal portfolio website using React.js, showcasing projects, technical skills, certifications, and experience.",
-      "Built reusable React components and implemented a responsive, modern UI optimized for different screen sizes.",
-      "Structured the application for maintainability using a component-based architecture and integrated project-focused sections for an improved user experience.",
-    ],
+    name: "Personal Portfolio",
+    description:
+      "A responsive personal portfolio showcasing projects, technical skills, certifications, and experience, built with reusable React components.",
     stack: ["React", "CSS"],
+    preview: {
+      type: "image",
+      src: "/portfolio-preview.png",
+      alt: "Personal portfolio homepage",
+    },
     githubUrl: "https://github.com/YashRajSahu44/portfolio",
-    liveUrl: "yashraj-nu.vercel.app",
+    liveUrl: "https://yashraj-nu.vercel.app",
   },
   {
     name: "TaxWise",
-    tag: "Tax calculator",
-    description: [
-      "Developed a brutalist-styled income tax calculator based on India's New Tax Regime (FY 2025–26).",
-      "Implemented instant tax estimation based on the user's annual income.",
-      "Designed a clean, responsive interface focused on simplicity and ease of use.",
-      "Added automated tax calculations to provide users with a quick estimate of their tax liability.",
-    ],
+    description:
+      "A clean, brutalist-styled income tax calculator for India's New Tax Regime (FY 2025–26), providing quick estimates from annual income.",
     stack: ["JavaScript"],
+    preview: { type: "image", src: "/taxwise-preview.png", alt: "TaxWise calculator interface" },
     githubUrl: "https://github.com/YashRajSahu44/TaxWise",
     liveUrl: "https://yashrajsahu44.github.io/TaxWise/",
   },
 ];
 
+function ProjectPreview({ preview, name }) {
+  if (preview.type === "video") {
+    return (
+      <video
+        aria-label={preview.label}
+        className="h-full w-full object-cover"
+        src={preview.src}
+        autoPlay
+        controls
+        loop
+        muted
+        playsInline
+        preload="metadata"
+      />
+    );
+  }
+
+  return (
+    <img
+      className="h-full w-full object-cover object-top"
+      src={preview.src}
+      alt={preview.alt}
+      loading="lazy"
+      decoding="async"
+      aria-label={`${name} project preview`}
+    />
+  );
+}
+
 function Projects() {
   return (
     <PageShell>
       <PageTitle eyebrow="Projects" title="Things I've" accent="built." />
-      <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((p, i) => (
-          <motion.div
-            key={p.name}
+      <div className="space-y-8">
+        {projects.map((project, i) => (
+          <motion.article
+            key={project.name}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + i * 0.08 }}
-            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-xl"
+            className="overflow-hidden border border-border bg-secondary/40 p-4 sm:p-6"
           >
-            <div className="mb-3 flex items-center justify-between gap-4">
-              <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                {p.tag}
-              </span>
-              <div className="flex flex-wrap gap-3 text-sm">
-                {p.githubUrl ? (
-                  <a
-                    href={p.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Github size={16} aria-hidden="true" />
-                    GitHub
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 text-muted-foreground/70">
-                    <Github size={16} aria-hidden="true" />
-                    GitHub link
-                  </span>
-                )}
-                {p.liveUrl ? (
-                  <a
-                    href={p.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <ExternalLink size={16} aria-hidden="true" />
-                    Live
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 text-muted-foreground/70">
-                    <ExternalLink size={16} aria-hidden="true" />
-                    Live link
-                  </span>
-                )}
-              </div>
+            <div className="aspect-video overflow-hidden border border-border bg-card">
+              <ProjectPreview preview={project.preview} name={project.name} />
             </div>
-            <h3 className="font-display text-2xl">{p.name}</h3>
-            <ul className="mt-3 flex-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
-              {p.description.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <div className="mt-5">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Technologies / tools used
+
+            <div className="pt-5">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-sans text-2xl font-medium uppercase tracking-wide sm:text-3xl">
+                  {project.name}
+                </h2>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={`View ${project.name} on GitHub`}
+                >
+                  <Github className="h-4 w-4" aria-hidden="true" />
+                  GitHub
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
+
+              <div className="my-4 border-t border-border" />
+              <p className="text-base leading-7 text-muted-foreground sm:text-lg">
+                {project.description}
               </p>
-              <div className="flex flex-wrap gap-2">
-                {p.stack.map((s) => (
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.stack.map((technology) => (
                   <span
-                    key={s}
-                    className="rounded-full border border-border bg-secondary px-3 py-1 text-xs"
+                    key={technology}
+                    className="border border-border px-2.5 py-1 text-xs uppercase tracking-wide text-muted-foreground"
                   >
-                    {s}
+                    {technology}
                   </span>
                 ))}
               </div>
+
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 flex min-h-12 items-center justify-center gap-2 border border-border px-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+              >
+                Open project
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
-          </motion.div>
+          </motion.article>
         ))}
       </div>
     </PageShell>
