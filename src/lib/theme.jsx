@@ -1,34 +1,59 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+
 const ThemeContext = createContext(null);
+
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("light");
   const [transitioning, setTransitioning] = useState(false);
+  const [transitionTheme, setTransitionTheme] = useState(null);
+  const themeRef = useRef("light");
+  const transitioningRef = useRef(false);
+  const themeTimeout = useRef(null);
+  const transitionTimeout = useRef(null);
+
   useEffect(() => {
-    const stored = typeof window !== "undefined" && localStorage.getItem("theme");
+    const stored = localStorage.getItem("theme");
     const initial =
       stored ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    themeRef.current = initial;
     setTheme(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
+
+    return () => {
+      window.clearTimeout(themeTimeout.current);
+      window.clearTimeout(transitionTimeout.current);
+    };
   }, []);
+
   const toggle = useCallback(() => {
+    if (transitioningRef.current) return;
+
+    const next = themeRef.current === "light" ? "dark" : "light";
+    transitioningRef.current = true;
+    themeRef.current = next;
+    setTransitionTheme(next);
     setTransitioning(true);
-    // let the girl slide in first, then swap the theme mid-animation
-    window.setTimeout(() => {
-      setTheme((prev) => {
-        const next = prev === "light" ? "dark" : "light";
-        document.documentElement.classList.toggle("dark", next === "dark");
-        localStorage.setItem("theme", next);
-        return next;
-      });
-    }, 450);
-    window.setTimeout(() => setTransitioning(false), 1400);
+
+    themeTimeout.current = window.setTimeout(() => {
+      document.documentElement.classList.toggle("dark", next === "dark");
+      localStorage.setItem("theme", next);
+      setTheme(next);
+    }, 350);
+
+    transitionTimeout.current = window.setTimeout(() => {
+      transitioningRef.current = false;
+      setTransitioning(false);
+      setTransitionTheme(null);
+    }, 1050);
   }, []);
+
   return (
-    <ThemeContext.Provider value={{ theme, toggle, transitioning }}>
+    <ThemeContext.Provider value={{ theme, toggle, transitioning, transitionTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
+
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used within ThemeProvider");

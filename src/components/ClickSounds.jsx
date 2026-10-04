@@ -1,47 +1,61 @@
-import { useEffect } from "react";
-function playClick() {
-  try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    const ctx = new AC();
-    const now = ctx.currentTime;
-    // short high-freq "tick" — mechanical keyboard vibe
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "square";
-    o.frequency.setValueAtTime(1800, now);
-    o.frequency.exponentialRampToValueAtTime(900, now + 0.04);
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.exponentialRampToValueAtTime(0.12, now + 0.005);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
-    o.connect(g).connect(ctx.destination);
-    o.start(now);
-    o.stop(now + 0.07);
-    // tiny noise burst for the "click" body
-    const bufferSize = Math.floor(ctx.sampleRate * 0.03);
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
-    }
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-    const ng = ctx.createGain();
-    ng.gain.setValueAtTime(0.08, now);
-    ng.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
-    noise.connect(ng).connect(ctx.destination);
-    noise.start(now);
-    noise.stop(now + 0.03);
-    window.setTimeout(() => ctx.close(), 200);
-  } catch {
-    /* no-op */
-  }
-}
+import { useEffect, useRef } from "react";
+
 export function ClickSounds() {
+  const audioContextRef = useRef(null);
+
   useEffect(() => {
-    const handler = () => playClick();
-    window.addEventListener("pointerdown", handler, { passive: true });
-    return () => window.removeEventListener("pointerdown", handler);
+    const playClick = () => {
+      const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextConstructor) return;
+
+      try {
+        const audioContext = audioContextRef.current ?? new AudioContextConstructor();
+        audioContextRef.current = audioContext;
+
+        const playTone = () => {
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          const now = audioContext.currentTime;
+
+          oscillator.type = "triangle";
+          oscillator.frequency.setValueAtTime(520, now);
+          oscillator.frequency.exponentialRampToValueAtTime(260, now + 0.045);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.025, now + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+
+          oscillator.connect(gain);
+          gain.connect(audioContext.destination);
+          oscillator.start(now);
+          oscillator.stop(now + 0.075);
+        };
+
+        if (audioContext.state === "suspended") {
+          audioContext
+            .resume()
+            .then(playTone)
+            .catch((error) => {
+              console.warn("Unable to resume click sound audio context:", error);
+            });
+        } else {
+          playTone();
+        }
+      } catch (error) {
+        console.warn("Unable to play click sound:", error);
+      }
+    };
+
+    window.addEventListener("click", playClick);
+    return () => {
+      window.removeEventListener("click", playClick);
+      if (audioContextRef.current) {
+        audioContextRef.current.close().catch((error) => {
+          console.warn("Unable to close click sound audio context:", error);
+        });
+        audioContextRef.current = null;
+      }
+    };
   }, []);
+
   return null;
 }

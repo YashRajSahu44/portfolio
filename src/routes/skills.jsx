@@ -6,8 +6,8 @@ export const Route = createFileRoute("/skills")({
   component: Skills,
 });
 const skills = [
-  { name: "Java", note: "OOP & backend" },
-  { name: "Python", note: "ML, scripting" },
+  { name: "Java", note: "DSA & backend" },
+  { name: "Python", note: "Basic" },
   { name: "JavaScript", note: "modern web" },
   { name: "React", note: "component craft" },
   { name: "HTML", note: "semantic" },

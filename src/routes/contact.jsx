@@ -6,9 +6,9 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 const items = [
-  { icon: Mail, label: "Email", value: "hello@example.com", href: "mailto:hello@example.com" },
-  { icon: Github, label: "GitHub", value: "@aditya", href: "https://github.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "in/aditya", href: "https://linkedin.com" },
+  { icon: Mail, label: "Email", value: "yash@gmail", href: "yashsahu10th.com" },
+  { icon: Github, label: "GitHub", value: "@YashRajSahu44", href: "https://github.com/YashRajSahu44" },
+  { icon: Linkedin, label: "LinkedIn", value: "in/yash", href: "https://www.linkedin.com/in/yashraj-sahu-588825375/?isSelfProfile=true" },
 ];
 function Contact() {
   return (
