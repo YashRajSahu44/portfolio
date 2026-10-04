@@ -10,19 +10,6 @@ export const Route = createFileRoute("/projects")({
 
 const projects = [
   {
-    name: "SmartCampus",
-    description:
-      "A scalable in-campus marketplace for educational institutions, streamlining resource allocation, student communication, and digital campus services.",
-    stack: ["React", "Express", "MongoDB"],
-    preview: {
-      type: "image",
-      src: "/smartcampus-preview.png",
-      alt: "SmartCampus marketplace homepage",
-    },
-    githubUrl: "https://github.com/YashRajSahu44/Swaply",
-    liveUrl: "https://n3xtg3n.xyz/",
-  },
-  {
     name: "Doomy",
     description:
       "A Chrome extension that helps block distracting Reels and Shorts on YouTube and Instagram, with a React interface for managing preferences.",
@@ -34,6 +21,19 @@ const projects = [
     },
     githubUrl: "https://github.com/YashRajSahu44/doomy",
     liveUrl: "https://github.com/YashRajSahu44/doomy",
+  },
+  {
+     name: "SmartCampus",
+    description:
+      "A scalable in-campus marketplace for educational institutions, streamlining resource allocation, student communication, and digital campus services.",
+    stack: ["React", "Express", "MongoDB"],
+    preview: {
+      type: "image",
+      src: "/smartcampus-preview.png",
+      alt: "SmartCampus marketplace homepage",
+    },
+    githubUrl: "https://github.com/YashRajSahu44/Swaply",
+    liveUrl: "https://n3xtg3n.xyz/",
   },
   {
     name: "Personal Portfolio",
