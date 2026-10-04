@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
+import { Download } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 
 const animeAvatar = "/anime-avatar-default.jpg";
 const realAvatar = "/yash-profile-photo.jpg";
+const cvDownloadUrl = "/Cv%20(1).pdf";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,9 +61,8 @@ function Home() {
 
         <div className="mt-8 space-y-5 text-base leading-relaxed text-foreground md:text-lg">
           <p>
-             Building scalable frontend systems
-             and modern web experiences
-             with a strong focus on performance-focused engineering
+            Building scalable frontend systems and modern web experiences with a strong focus on
+            performance-focused engineering
           </p>
           <p className="font-hand text-2xl text-accent">
             I'm open to new roles, collaborations, and opportunities — feel free to reach out!
@@ -75,6 +76,14 @@ function Home() {
           <Link to="/contact" className="ink-underline text-muted-foreground">
             Get in touch
           </Link>
+          <a
+            href={cvDownloadUrl}
+            download="Yash-CV.pdf"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-medium transition-colors hover:bg-secondary"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Download CV
+          </a>
           <span className="ml-auto hidden text-xs text-muted-foreground md:inline">
             psst — tap the face
           </span>

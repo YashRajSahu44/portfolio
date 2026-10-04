@@ -2,11 +2,16 @@ import { useEffect, useRef } from "react";
 
 export function ClickSounds() {
   const audioContextRef = useRef(null);
+  const lastClickTimeRef = useRef(0);
 
   useEffect(() => {
     const playClick = () => {
       const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextConstructor) return;
+
+      const now = performance.now();
+      if (now - lastClickTimeRef.current < 90) return;
+      lastClickTimeRef.current = now;
 
       try {
         const audioContext = audioContextRef.current ?? new AudioContextConstructor();
@@ -17,17 +22,17 @@ export function ClickSounds() {
           const gain = audioContext.createGain();
           const now = audioContext.currentTime;
 
-          oscillator.type = "triangle";
-          oscillator.frequency.setValueAtTime(520, now);
-          oscillator.frequency.exponentialRampToValueAtTime(260, now + 0.045);
+          oscillator.type = "sine";
+          oscillator.frequency.setValueAtTime(330, now);
+          oscillator.frequency.exponentialRampToValueAtTime(220, now + 0.09);
           gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.025, now + 0.008);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.008, now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
 
           oscillator.connect(gain);
           gain.connect(audioContext.destination);
           oscillator.start(now);
-          oscillator.stop(now + 0.075);
+          oscillator.stop(now + 0.13);
         };
 
         if (audioContext.state === "suspended") {
