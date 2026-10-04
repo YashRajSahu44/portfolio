@@ -19,8 +19,8 @@ const projects = [
       "Designed the platform to improve accessibility, resource utilization, and student interaction.",
     ],
     stack: ["React", "Express", "MongoDB"],
-    githubUrl: "",
-    liveUrl: "",
+    githubUrl: "https://github.com/YashRajSahu44/Swaply",
+    liveUrl: "n3xtg3n.xyz/",
   },
   {
     name: "Doomy",
@@ -31,8 +31,8 @@ const projects = [
       "Implemented automatic detection and blocking of short-form content.",
     ],
     stack: ["React", "Manifest V3"],
-    githubUrl: "",
-    liveUrl: "",
+    githubUrl: "https://github.com/YashRajSahu44/doomy",
+    liveUrl: "https://github.com/YashRajSahu44/doomy",
   },
   {
     name: "Personal Portfolio Website",
@@ -43,8 +43,8 @@ const projects = [
       "Structured the application for maintainability using a component-based architecture and integrated project-focused sections for an improved user experience.",
     ],
     stack: ["React", "CSS"],
-    githubUrl: "",
-    liveUrl: "",
+    githubUrl: "https://github.com/YashRajSahu44/portfolio",
+    liveUrl: "yashraj-nu.vercel.app",
   },
   {
     name: "TaxWise",
@@ -56,8 +56,8 @@ const projects = [
       "Added automated tax calculations to provide users with a quick estimate of their tax liability.",
     ],
     stack: ["JavaScript"],
-    githubUrl: "",
-    liveUrl: "",
+    githubUrl: "https://github.com/YashRajSahu44/TaxWise",
+    liveUrl: "https://yashrajsahu44.github.io/TaxWise/",
   },
 ];
 
