@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { PageShell } from "@/components/PageShell";
-import meAsset from "@/assets/me.png.asset.json";
-import sanjiAsset from "@/assets/sanji.jpg.asset.json";
+
+const animeAvatar = "/anime-avatar-default.jpg";
+const realAvatar = "/yash-profile-photo.jpg";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -19,7 +21,7 @@ export const Route = createFileRoute("/")({
 });
 function Home() {
   const [showReal, setShowReal] = useState(false);
-  const avatar = showReal ? meAsset.url : sanjiAsset.url;
+  const avatar = showReal ? realAvatar : animeAvatar;
   const toggledOnce = useRef(false);
   const onToggle = () => {
     toggledOnce.current = true;
@@ -39,7 +41,7 @@ function Home() {
             <motion.img
               key={avatar}
               src={avatar}
-              alt="Yash"
+              alt={showReal ? "Yash" : "Anime avatar"}
               width={64}
               height={64}
               initial={{ scale: 0.4, rotate: -25, opacity: 0 }}
