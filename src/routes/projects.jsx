@@ -23,7 +23,7 @@ const projects = [
     liveUrl: "https://github.com/YashRajSahu44/doomy",
   },
   {
-     name: "SmartCampus",
+    name: "SmartCampus",
     description:
       "A scalable in-campus marketplace for educational institutions, streamlining resource allocation, student communication, and digital campus services.",
     stack: ["React", "Express", "MongoDB"],
@@ -92,7 +92,7 @@ function Projects() {
   return (
     <PageShell>
       <PageTitle eyebrow="Projects" title="Things I've" accent="built." />
-      <div className="space-y-8">
+      <div className="grid gap-6 lg:grid-cols-2">
         {projects.map((project, i) => (
           <motion.article
             key={project.name}
@@ -107,7 +107,7 @@ function Projects() {
 
             <div className="pt-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-sans text-2xl font-medium uppercase tracking-wide sm:text-3xl">
+                <h2 className="font-sans text-2xl font-medium uppercase tracking-wide">
                   {project.name}
                 </h2>
                 <a
@@ -124,7 +124,7 @@ function Projects() {
               </div>
 
               <div className="my-4 border-t border-border" />
-              <p className="text-base leading-7 text-muted-foreground sm:text-lg">
+              <p className="text-sm leading-6 text-muted-foreground sm:text-base">
                 {project.description}
               </p>
 
