@@ -15,6 +15,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { Navbar, MobileNav } from "@/components/Navbar";
 import { ThemeTransition } from "@/components/ThemeTransition";
 import { ClickSounds } from "@/components/ClickSounds";
+import { AmbientMusic } from "@/components/AmbientMusic";
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
@@ -115,6 +116,7 @@ function RootComponent() {
           <AnimatedOutlet />
           <ThemeTransition />
           <ClickSounds />
+          <AmbientMusic />
         </div>
       </ThemeProvider>
     </QueryClientProvider>
