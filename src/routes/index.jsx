@@ -6,7 +6,7 @@ import { PageShell } from "@/components/PageShell";
 
 const animeAvatar = "/anime-avatar-default.jpg";
 const realAvatar = "/yash-profile-photo.jpg";
-const cvDownloadUrl = "/Cv%20(1).pdf";
+const cvUrl = "/cv.html";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,8 +77,9 @@ function Home() {
             Get in touch
           </Link>
           <a
-            href={cvDownloadUrl}
-            download="Yash-CV.pdf"
+            href={cvUrl}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-medium transition-colors hover:bg-secondary"
           >
             <Download className="h-4 w-4" aria-hidden="true" />
