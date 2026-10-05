@@ -22,17 +22,17 @@ export function ClickSounds() {
           const gain = audioContext.createGain();
           const now = audioContext.currentTime;
 
-          oscillator.type = "sine";
-          oscillator.frequency.setValueAtTime(330, now);
-          oscillator.frequency.exponentialRampToValueAtTime(220, now + 0.09);
+          oscillator.type = "triangle";
+          oscillator.frequency.setValueAtTime(1100, now);
+          oscillator.frequency.exponentialRampToValueAtTime(650, now + 0.04);
           gain.gain.setValueAtTime(0.0001, now);
-          gain.gain.exponentialRampToValueAtTime(0.008, now + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.012, now + 0.002);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
 
           oscillator.connect(gain);
           gain.connect(audioContext.destination);
           oscillator.start(now);
-          oscillator.stop(now + 0.13);
+          oscillator.stop(now + 0.05);
         };
 
         if (audioContext.state === "suspended") {
