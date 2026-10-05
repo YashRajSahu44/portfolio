@@ -44,7 +44,7 @@ export function ThemeProvider({ children }) {
       transitioningRef.current = false;
       setTransitioning(false);
       setTransitionTheme(null);
-    }, 1050);
+    }, 1300);
   }, []);
 
   return (
