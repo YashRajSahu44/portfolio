@@ -7,8 +7,18 @@ export const Route = createFileRoute("/contact")({
 });
 const items = [
   { icon: Mail, label: "Email", value: "yash@gmail", href: "yashsahu10th.com" },
-  { icon: Github, label: "GitHub", value: "@YashRajSahu44", href: "https://github.com/YashRajSahu44" },
-  { icon: Linkedin, label: "LinkedIn", value: "in/yash", href: "https://www.linkedin.com/in/yashraj-sahu-588825375/?isSelfProfile=true" },
+  {
+    icon: Github,
+    label: "GitHub",
+    value: "@YashRajSahu44",
+    href: "https://github.com/YashRajSahu44",
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: "in/yash",
+    href: "https://www.linkedin.com/in/yashraj-sahu-588825375/?isSelfProfile=true",
+  },
 ];
 function Contact() {
   return (

@@ -36,7 +36,7 @@ export function ClickSounds() {
           highPass.type = "highpass";
           highPass.frequency.setValueAtTime(1400, now);
           clickGain.gain.setValueAtTime(0.0001, now);
-          clickGain.gain.exponentialRampToValueAtTime(0.018, now + 0.001);
+          clickGain.gain.exponentialRampToValueAtTime(0.05, now + 0.001);
           clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
           noiseSource.connect(highPass);
           highPass.connect(clickGain);
@@ -50,7 +50,7 @@ export function ClickSounds() {
           thock.frequency.setValueAtTime(190, now);
           thock.frequency.exponentialRampToValueAtTime(95, now + 0.035);
           thockGain.gain.setValueAtTime(0.0001, now);
-          thockGain.gain.exponentialRampToValueAtTime(0.012, now + 0.002);
+          thockGain.gain.exponentialRampToValueAtTime(0.035, now + 0.002);
           thockGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
           thock.connect(thockGain);
           thockGain.connect(audioContext.destination);

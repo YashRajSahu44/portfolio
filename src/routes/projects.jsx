@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { PageShell, PageTitle } from "@/components/PageShell";
@@ -59,6 +60,21 @@ const projects = [
   },
 ];
 
+const contributionsApiUrl = "https://github-contributions-api.jogruber.de/v4/YashRajSahu44?y=last";
+
+function buildContributionWeeks(contributions) {
+  if (contributions.length === 0) return [];
+
+  const firstDate = new Date(`${contributions[0].date}T00:00:00Z`);
+  const days = [...Array(firstDate.getUTCDay()).fill(null), ...contributions];
+  const trailingDays = (7 - (days.length % 7)) % 7;
+  days.push(...Array(trailingDays).fill(null));
+
+  return Array.from({ length: days.length / 7 }, (_, weekIndex) =>
+    days.slice(weekIndex * 7, weekIndex * 7 + 7),
+  );
+}
+
 function ProjectPreview({ preview, name }) {
   if (preview.type === "video") {
     return (
@@ -84,6 +100,136 @@ function ProjectPreview({ preview, name }) {
       decoding="async"
       aria-label={`${name} project preview`}
     />
+  );
+}
+
+function GitHubContributions() {
+  const [contributionData, setContributionData] = useState(null);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(contributionsApiUrl, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`GitHub contributions request failed: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (
+          typeof data.total?.lastYear !== "number" ||
+          !Array.isArray(data.contributions) ||
+          data.contributions.some(
+            (day) =>
+              typeof day.date !== "string" ||
+              typeof day.count !== "number" ||
+              typeof day.level !== "number",
+          )
+        ) {
+          throw new Error("GitHub contributions response has an invalid shape.");
+        }
+
+        setContributionData(data);
+      })
+      .catch((error) => {
+        if (error.name === "AbortError") return;
+        console.warn("Unable to load GitHub contributions:", error);
+        setLoadError(true);
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const weeks = contributionData ? buildContributionWeeks(contributionData.contributions) : [];
+  const levelOpacity = [0, 0.25, 0.5, 0.75, 1];
+
+  return (
+    <section
+      className="mt-10 border border-border bg-card p-4 sm:p-6"
+      aria-labelledby="contributions-title"
+    >
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">GitHub</div>
+          <h2 id="contributions-title" className="mt-2 font-display text-2xl md:text-3xl">
+            Contribution graph
+          </h2>
+          {contributionData ? (
+            <p className="mt-1 text-sm text-muted-foreground">
+              {contributionData.total.lastYear.toLocaleString()} contributions in the last year
+            </p>
+          ) : (
+            <p className="mt-1 text-sm text-muted-foreground" role={loadError ? "alert" : "status"}>
+              {loadError ? "Contributions couldn't be loaded right now." : "Loading contributions…"}
+            </p>
+          )}
+        </div>
+        <a
+          href="https://github.com/YashRajSahu44"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary"
+        >
+          <Github className="h-4 w-4" aria-hidden="true" />
+          View profile
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </a>
+      </div>
+
+      {weeks.length > 0 && (
+        <div
+          className="overflow-x-auto pb-2"
+          role="img"
+          aria-label="GitHub contributions over the last year"
+        >
+          <div className="grid w-max grid-flow-col grid-rows-7 gap-1">
+            {weeks.flatMap((week, weekIndex) =>
+              week.map((day, dayIndex) =>
+                day ? (
+                  <span
+                    key={day.date}
+                    title={`${day.count} contributions on ${day.date}`}
+                    aria-label={`${day.count} contributions on ${day.date}`}
+                    className="h-3 w-3 rounded-[2px] border border-border/60"
+                    style={{
+                      backgroundColor:
+                        day.level === 0
+                          ? "var(--secondary)"
+                          : `color-mix(in oklab, var(--accent) ${levelOpacity[Math.min(day.level, 4)] * 100}%, var(--secondary))`,
+                    }}
+                  />
+                ) : (
+                  <span
+                    key={`empty-${weekIndex}-${dayIndex}`}
+                    className="h-3 w-3"
+                    aria-hidden="true"
+                  />
+                ),
+              ),
+            )}
+          </div>
+          <div className="mt-3 flex items-center justify-end gap-2 text-xs text-muted-foreground">
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((level) => (
+              <span
+                key={level}
+                className="h-3 w-3 rounded-[2px] border border-border/60"
+                style={{
+                  backgroundColor:
+                    level === 0
+                      ? "var(--secondary)"
+                      : `color-mix(in oklab, var(--accent) ${levelOpacity[level] * 100}%, var(--secondary))`,
+                }}
+                aria-hidden="true"
+              />
+            ))}
+            <span>More</span>
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -151,6 +297,7 @@ function Projects() {
           </motion.article>
         ))}
       </div>
+      <GitHubContributions />
     </PageShell>
   );
 }
