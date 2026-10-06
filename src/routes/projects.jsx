@@ -181,18 +181,21 @@ function GitHubContributions() {
       {weeks.length > 0 && (
         <div
           className="overflow-x-auto pb-2"
-          role="img"
-          aria-label="GitHub contributions over the last year"
+          role="group"
+          aria-label="GitHub contributions over the last year. Select a day to view matching commits on GitHub."
         >
           <div className="grid w-max grid-flow-col grid-rows-7 gap-1">
             {weeks.flatMap((week, weekIndex) =>
               week.map((day, dayIndex) =>
                 day ? (
-                  <span
+                  <a
                     key={day.date}
-                    title={`${day.count} contributions on ${day.date}`}
-                    aria-label={`${day.count} contributions on ${day.date}`}
-                    className="h-3 w-3 rounded-[2px] border border-border/60"
+                    href={`https://github.com/search?q=${encodeURIComponent(`author:YashRajSahu44 author-date:${day.date}`)}&type=commits`}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={`${day.count} contributions on ${day.date}. View matching commits on GitHub.`}
+                    aria-label={`${day.count} contributions on ${day.date}. View matching commits on GitHub.`}
+                    className="h-3 w-3 rounded-[2px] border border-border/60 outline-offset-2 transition-transform hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
                     style={{
                       backgroundColor:
                         day.level === 0
