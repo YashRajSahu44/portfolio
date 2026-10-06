@@ -38,13 +38,13 @@ export function ThemeProvider({ children }) {
       document.documentElement.classList.toggle("dark", next === "dark");
       localStorage.setItem("theme", next);
       setTheme(next);
-    }, 500);
+    }, 180);
 
     transitionTimeout.current = window.setTimeout(() => {
       transitioningRef.current = false;
       setTransitioning(false);
       setTransitionTheme(null);
-    }, 2100);
+    }, 900);
   }, []);
 
   return (
