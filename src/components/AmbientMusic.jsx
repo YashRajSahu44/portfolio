@@ -113,7 +113,7 @@ export function AmbientMusic() {
           timers.push(melodyTimer);
         }
 
-        if (audioContext.state === "suspended") {
+        if (audioContext.state !== "running") {
           audioContext.resume().catch((error) => {
             console.warn("Unable to resume background music:", error);
           });
