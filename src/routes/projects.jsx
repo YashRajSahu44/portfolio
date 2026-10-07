@@ -10,6 +10,9 @@ export const Route = createFileRoute("/projects")({
 });
 
 const projectDemoVideo = "/FocuSee%20Project%202026-10-01%2023-41-55.mp4";
+const SmartCampus = "/smartcampus.mp4";
+const portfolio = "/portfolio1.mp4";
+const taxwise = "/taxwise.mp4"
 
 const projects = [
   {
@@ -33,7 +36,7 @@ const projects = [
     stack: ["React", "Express", "MongoDB"],
     preview: {
       type: "video",
-      src: projectDemoVideo,
+      src: SmartCampus,
       poster: "/smartcampus-preview.png",
       label: "SmartCampus project video",
     },
@@ -47,7 +50,7 @@ const projects = [
     stack: ["React", "CSS"],
     preview: {
       type: "video",
-      src: projectDemoVideo,
+      src: portfolio,
       poster: "/portfolio-preview.png",
       label: "Portfolio project video",
     },
@@ -61,7 +64,7 @@ const projects = [
     stack: ["JavaScript"],
     preview: {
       type: "video",
-      src: projectDemoVideo,
+      src: taxwise,
       poster: "/taxwise-preview.png",
       label: "TaxWise project video",
     },
