@@ -9,6 +9,8 @@ export const Route = createFileRoute("/projects")({
   component: Projects,
 });
 
+const projectDemoVideo = "/FocuSee%20Project%202026-10-01%2023-41-55.mp4";
+
 const projects = [
   {
     name: "Doomy",
@@ -17,7 +19,8 @@ const projects = [
     stack: ["React", "Manifest V3"],
     preview: {
       type: "video",
-      src: "/FocuSee%20Project%202026-10-01%2023-41-55.mp4",
+      src: projectDemoVideo,
+      poster: "/doomy-poster.jpg",
       label: "Doomy demo video",
     },
     githubUrl: "https://github.com/YashRajSahu44/doomy",
@@ -29,9 +32,10 @@ const projects = [
       "A scalable in-campus marketplace for educational institutions, streamlining resource allocation, student communication, and digital campus services.",
     stack: ["React", "Express", "MongoDB"],
     preview: {
-      type: "image",
-      src: "/smartcampus-preview.png",
-      alt: "SmartCampus marketplace homepage",
+      type: "video",
+      src: projectDemoVideo,
+      poster: "/smartcampus-preview.png",
+      label: "SmartCampus project video",
     },
     githubUrl: "https://github.com/YashRajSahu44/Swaply",
     liveUrl: "https://n3xtg3n.xyz/",
@@ -42,9 +46,10 @@ const projects = [
       "A responsive personal portfolio showcasing projects, technical skills, certifications, and experience, built with reusable React components.",
     stack: ["React", "CSS"],
     preview: {
-      type: "image",
-      src: "/portfolio-preview.png",
-      alt: "Personal portfolio homepage",
+      type: "video",
+      src: projectDemoVideo,
+      poster: "/portfolio-preview.png",
+      label: "Portfolio project video",
     },
     githubUrl: "https://github.com/YashRajSahu44/portfolio",
     liveUrl: "https://yashraj-nu.vercel.app",
@@ -54,7 +59,12 @@ const projects = [
     description:
       "A clean, brutalist-styled income tax calculator for India's New Tax Regime (FY 2025–26), providing quick estimates from annual income.",
     stack: ["JavaScript"],
-    preview: { type: "image", src: "/taxwise-preview.png", alt: "TaxWise calculator interface" },
+    preview: {
+      type: "video",
+      src: projectDemoVideo,
+      poster: "/taxwise-preview.png",
+      label: "TaxWise project video",
+    },
     githubUrl: "https://github.com/YashRajSahu44/TaxWise",
     liveUrl: "https://yashrajsahu44.github.io/TaxWise/",
   },
@@ -82,6 +92,7 @@ function ProjectPreview({ preview, name }) {
         aria-label={preview.label}
         className="h-full w-full object-cover"
         src={preview.src}
+        poster={preview.poster}
         autoPlay
         loop
         muted
