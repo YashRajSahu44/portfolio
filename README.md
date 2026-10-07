@@ -1,4 +1,4 @@
-# Portfolio 2
+# Portfolio 
 
 A modern personal portfolio built with React, Vite, TanStack Router, and Tailwind-inspired styling. It showcases projects, skills, certifications, and experience in a clean, polished interface with motion-based interactions.
 
