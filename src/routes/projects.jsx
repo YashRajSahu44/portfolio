@@ -12,7 +12,8 @@ export const Route = createFileRoute("/projects")({
 const projectDemoVideo = "/FocuSee%20Project%202026-10-01%2023-41-55.mp4";
 const SmartCampus = "/smartcampus.mp4";
 const portfolio = "/portfolio1.mp4";
-const taxwise = "/taxwise.mp4"
+const portfolio2 = "/portfolio2.mp4";
+const taxwise = "/taxwise.mp4";
 
 const projects = [
   {
@@ -28,6 +29,20 @@ const projects = [
     },
     githubUrl: "https://github.com/YashRajSahu44/doomy",
     liveUrl: "https://github.com/YashRajSahu44/doomy",
+  },
+  {
+    name: "Portfolio 2",
+    description:
+      "A second-generation personal portfolio focused on clean storytelling, smoother motion, and a sharper design system for presenting work and credentials.",
+    stack: ["React", "Tailwind", "Motion"],
+    preview: {
+      type: "video",
+      src: portfolio2,
+      poster: "/portfolio-preview.png",
+      label: "Portfolio 2 demo video",
+    },
+    githubUrl: "https://github.com/YashRajSahu44/portfolio02",
+    liveUrl: "https://yashraj-nu.vercel.app",
   },
   {
     name: "SmartCampus",
