@@ -9,7 +9,7 @@ export const Route = createFileRoute("/projects")({
   component: Projects,
 });
 
-const projectDemoVideo = "/doomy.png";
+const projectDemoVideo = "/doomy.mp4";
 const SmartCampus = "/smartcampus.mp4";
 const portfolio = "/portfolio1.mp4";
 const portfolio2 = "/portfolio2.mp4";
@@ -22,10 +22,10 @@ const projects = [
       "A Chrome extension that helps block distracting Reels and Shorts on YouTube and Instagram, with a React interface for managing preferences.",
     stack: ["React", "Manifest V3"],
     preview: {
-      type: "image",
+      type: "video",
       src: projectDemoVideo,
       poster: "/doomy-poster.jpg",
-      label: "Doomy demo image",
+      label: "Doomy demo video",
     },
     githubUrl: "https://github.com/YashRajSahu44/doomy",
     liveUrl: "https://github.com/YashRajSahu44/doomy",
