@@ -16,7 +16,6 @@ const experiences = [
     location: "Bhopal, India",
     description:
       "Undergraduate studies specializing in Artificial Intelligence & Machine Learning, building a strong foundation in backend development, algorithms, and applied ML.",
-    tags: ["AIML", "Python", "DSA", "Backend"],
   },
   {
     period: "Jun 2025 — Present",
@@ -28,7 +27,6 @@ const experiences = [
       "Contributing to open-source projects across the GSSoC cohort.",
       "Collaborating with mentors and maintainers on issues, PRs, and code reviews.",
     ],
-    tags: ["Open Source", "Git", "GitHub"],
   },
   {
     period: "Apr 2025 – Jul 2025",
@@ -41,7 +39,6 @@ const experiences = [
       "Edited short-form videos for social media to boost reach and engagement.",
       "Collaborated with the team to align visuals with brand strategy.",
     ],
-    tags: ["Graphic Design", "Branding", "Social Media"],
   },
 ];
 
@@ -85,18 +82,6 @@ function Experience() {
                     </li>
                   ))}
                 </ul>
-              )}
-              {exp.tags && (
-                <div className="mt-3.5 flex flex-wrap gap-2">
-                  {exp.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-border bg-secondary/50 px-2.5 py-0.5 text-xs text-muted-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
               )}
             </div>
           </motion.div>
