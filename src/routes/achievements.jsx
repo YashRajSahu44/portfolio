@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Trophy, Award, Sparkles, GitCommit } from "lucide-react";
 import { PageShell, PageTitle } from "@/components/PageShell";
 
 export const Route = createFileRoute("/achievements")({
@@ -10,9 +9,10 @@ export const Route = createFileRoute("/achievements")({
 
 const achievements = [
   {
-    icon: Trophy,
-    title: "Finalist — TIT Srijan Hackathon 2026",
-    highlight: "Top 2000+ Participants",
+    period: "2026",
+    title: "Finalist — TIT Srijan Hackathon",
+    organization: "SmartCampus Project",
+    kind: "National Hackathon",
     description: (
       <>
         Selected from <strong className="font-semibold text-foreground">2000+ participants</strong>{" "}
@@ -20,56 +20,54 @@ const achievements = [
         marketplace platform.
       </>
     ),
-    badge: "Hackathon",
   },
   {
-    icon: Trophy,
-    title: "Finalist — AITR AI Manthan Indore Hackathon",
-    highlight: "Top 1200+ Participants",
+    period: "2026",
+    title: "Finalist — AITR AI Manthan Hackathon",
+    organization: "AITR Indore",
+    kind: "AI Hackathon",
     description: (
       <>
         Selected among <strong className="font-semibold text-foreground">1200+ participants</strong>{" "}
-        for innovative AI problem solving and implementation.
+        for innovative artificial intelligence problem solving.
       </>
     ),
-    badge: "Hackathon",
   },
   {
-    icon: Award,
+    period: "2025",
     title: "NPTEL Elite + Silver Certification",
-    highlight: "Programming in Java",
+    organization: "NPTEL · IIT Kharagpur",
+    kind: "Academic Excellence",
     description:
-      "Awarded Elite + Silver grade certification in Programming in Java, demonstrating deep grasp of core object-oriented programming, data structures, and algorithms.",
-    badge: "Certification",
+      "Awarded Elite + Silver certificate in Programming in Java, demonstrating deep command of core OOP and algorithms.",
   },
   {
-    icon: Sparkles,
-    title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
-    highlight: "Oracle",
+    period: "2025",
+    title: "OCI Certified AI Foundations Associate",
+    organization: "Oracle",
+    kind: "Cloud & AI",
     description:
-      "Certified foundational expertise in artificial intelligence, machine learning concepts, and OCI AI infrastructure.",
-    badge: "Oracle Cloud",
+      "Certified foundational expertise in artificial intelligence, machine learning, and cloud infrastructure.",
   },
   {
-    icon: Sparkles,
-    title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
-    highlight: "Oracle",
+    period: "2025",
+    title: "OCI Certified Generative AI Professional",
+    organization: "Oracle",
+    kind: "Professional Certification",
     description:
-      "Certified professional capability in Generative AI architectures, LLMs, prompt engineering, and fine-tuning on OCI.",
-    badge: "Oracle Cloud",
+      "Certified professional capability in Generative AI architectures, LLM pipelines, and fine-tuning.",
   },
   {
-    icon: GitCommit,
-    title: "400+ GitHub Contributions in 5 Months",
-    highlight: "Consistent Engineering",
+    period: "2025 — Present",
+    title: "400+ GitHub Contributions",
+    organization: "Open Source & Engineering",
+    kind: "Consistency",
     description: (
       <>
-        Maintained high commit velocity with over{" "}
-        <strong className="font-semibold text-foreground">400+ contributions</strong> in 5 months
-        across open source repositories and personal systems.
+        Achieved over <strong className="font-semibold text-foreground">400+ contributions</strong>{" "}
+        within 5 months across open source projects and personal software development.
       </>
     ),
-    badge: "Open Source",
   },
 ];
 
@@ -77,37 +75,38 @@ function Achievements() {
   return (
     <PageShell>
       <PageTitle eyebrow="Honors & Proof" title="Key" accent="achievements." />
-      <div className="grid gap-4 md:grid-cols-2">
-        {achievements.map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <motion.article
-              key={item.title}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.06 * i, duration: 0.4 }}
-              className="group relative rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-xl border border-border bg-secondary/50 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
-                  {item.badge}
-                </span>
+      <div className="border-t border-border">
+        {achievements.map((item, i) => (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.06 * i, duration: 0.4 }}
+            className="grid grid-cols-1 gap-2 border-b border-border py-6 transition-colors hover:bg-secondary/15 md:grid-cols-[220px_1fr] md:gap-8 md:py-8"
+          >
+            <div className="pt-0.5 text-xs uppercase tracking-[0.22em] text-muted-foreground sm:text-sm">
+              {item.period}
+            </div>
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h2 className="font-sans text-base font-medium uppercase tracking-wider text-foreground sm:text-lg">
+                  {item.title}
+                </h2>
+                {item.kind && (
+                  <span className="text-xs italic text-muted-foreground">{item.kind}</span>
+                )}
               </div>
-              <h2 className="mt-4 font-display text-xl leading-snug text-foreground md:text-2xl">
-                {item.title}
-              </h2>
-              <div className="mt-1 text-xs uppercase tracking-[0.2em] text-accent">
-                {item.highlight}
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-            </motion.article>
-          );
-        })}
+              {item.organization && (
+                <p className="mt-1 text-sm font-medium text-foreground">{item.organization}</p>
+              )}
+              {item.description && (
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </PageShell>
   );
