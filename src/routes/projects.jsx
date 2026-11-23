@@ -32,7 +32,7 @@ const projects = [
     liveUrl: "https://github.com/YashRajSahu44/doomy",
   },
   {
-    name: "Nax Aero",
+    name: "Nex Aero",
     description:
       "AI-powered predictive maintenance system that predicts aircraft engine Remaining Useful Life (RUL) and detects anomalies using Machine Learning, helping prevent unexpected failures and improve engine reliability.",
     stack: ["Python", "Machine Learning", "Predictive AI"],
