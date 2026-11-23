@@ -42,8 +42,8 @@ const projects = [
       poster: "/nexaero-preview.png",
       label: "Nax Aero project demo video",
     },
-    githubUrl: "https://github.com/YashRajSahu44/nexaero",
-    liveUrl: "https://github.com/YashRajSahu44/nexaero",
+    githubUrl: "https://github.com/YashRajSahu44/Nex-Aero",
+    liveUrl: "nex-aero.vercel.app/",
   },
   {
     name: "SmartCampus",

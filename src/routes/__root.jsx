@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/lib/theme";
 import { Navbar, MobileNav } from "@/components/Navbar";
+import { LampPullCord } from "@/components/LampPullCord";
 import { ThemeTransition } from "@/components/ThemeTransition";
 import { ClickSounds } from "@/components/ClickSounds";
 import { AmbientMusic } from "@/components/AmbientMusic";
@@ -111,6 +112,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <div className="flex min-h-screen flex-col overflow-hidden">
+          <LampPullCord />
           <Navbar />
           <MobileNav />
           <AnimatedOutlet />
