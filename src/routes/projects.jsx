@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { PageShell, PageTitle } from "@/components/PageShell";
@@ -38,7 +38,7 @@ const projects = [
     preview: {
       type: "video",
       src: portfolio2,
-      poster: "/portfolio-preview.png",
+      poster: "/portfolio2-preview.png",
       label: "Portfolio 2 demo video",
     },
     githubUrl: "https://github.com/YashRajSahu44/portfolio02",
@@ -104,19 +104,52 @@ function buildContributionWeeks(contributions) {
 }
 
 function ProjectPreview({ preview, name }) {
+  const [isInView, setIsInView] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "250px" },
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   if (preview.type === "video") {
     return (
-      <video
-        aria-label={preview.label}
-        className="h-full w-full object-cover"
-        src={preview.src}
-        poster={preview.poster}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-      />
+      <div ref={containerRef} className="relative h-full w-full overflow-hidden bg-card">
+        {isInView ? (
+          <video
+            aria-label={preview.label}
+            className="h-full w-full object-cover"
+            src={preview.src}
+            poster={preview.poster}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          />
+        ) : (
+          <img
+            src={preview.poster}
+            alt={preview.label || `${name} preview`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+      </div>
     );
   }
 
