@@ -10,6 +10,7 @@ export const Route = createFileRoute("/projects")({
 });
 
 const projectDemoVideo = "/doomy.mp4";
+const naxAero = "/nexaero.mp4";
 const SmartCampus = "/smartcampus.mp4";
 const portfolio = "/portfolio1.mp4";
 const portfolio2 = "/portfolio2.mp4";
@@ -31,18 +32,18 @@ const projects = [
     liveUrl: "https://github.com/YashRajSahu44/doomy",
   },
   {
-    name: "Portfolio 2",
+    name: "Nax Aero",
     description:
-      "A second-generation personal portfolio focused on clean storytelling, smoother motion, and a sharper design system for presenting work and credentials.",
-    stack: ["React", "Tailwind", "Motion"],
+      "AI-powered predictive maintenance system that predicts aircraft engine Remaining Useful Life (RUL) and detects anomalies using Machine Learning, helping prevent unexpected failures and improve engine reliability.",
+    stack: ["Python", "Machine Learning", "Predictive AI"],
     preview: {
       type: "video",
-      src: portfolio2,
-      poster: "/portfolio2-preview.png",
-      label: "Portfolio 2 demo video",
+      src: naxAero,
+      poster: "/nexaero-preview.png",
+      label: "Nax Aero project demo video",
     },
-    githubUrl: "https://github.com/YashRajSahu44/portfolio02",
-    liveUrl: "https://yashraj-nu.vercel.app",
+    githubUrl: "https://github.com/YashRajSahu44/nexaero",
+    liveUrl: "https://github.com/YashRajSahu44/nexaero",
   },
   {
     name: "SmartCampus",
@@ -59,7 +60,21 @@ const projects = [
     liveUrl: "https://n3xtg3n.xyz/",
   },
   {
-    name: "Personal Portfolio",
+    name: "Portfolio",
+    description:
+      "A second-generation personal portfolio focused on clean storytelling, smoother motion, and a sharper design system for presenting work and credentials.",
+    stack: ["React", "Tailwind", "Motion"],
+    preview: {
+      type: "video",
+      src: portfolio2,
+      poster: "/portfolio2-preview.png",
+      label: "Portfolio 2 demo video",
+    },
+    githubUrl: "https://github.com/YashRajSahu44/portfolio02",
+    liveUrl: "https://yashraj-nu.vercel.app",
+  },
+  {
+    name: "Second Portfolio",
     description:
       "A responsive personal portfolio showcasing projects, technical skills, certifications, and experience, built with reusable React components.",
     stack: ["React", "CSS"],
