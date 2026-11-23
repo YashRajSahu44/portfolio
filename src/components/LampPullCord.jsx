@@ -195,11 +195,7 @@ export function LampPullCord() {
   return (
     <div
       ref={containerRef}
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={handlePointerLeave}
-      onPointerMove={handlePointerMove}
-      className="fixed right-3 top-0 z-50 h-52 w-28 select-none md:right-8"
-      style={{ pointerEvents: "auto" }}
+      className="pointer-events-none fixed right-2 top-0 z-50 h-56 w-20 select-none md:right-5"
       aria-label="Interactive flexible lamp pull-cord"
     >
       {/* Ceiling Mount Bracket */}
@@ -250,6 +246,9 @@ export function LampPullCord() {
       {/* Pull Handle / Lamp Knob with 2D Drag & Hover Physics */}
       <motion.button
         type="button"
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        onPointerMove={handlePointerMove}
         style={{
           x: springX,
           y: springY,
@@ -263,7 +262,7 @@ export function LampPullCord() {
         onDragEnd={handleDragEnd}
         onClick={handleClick}
         whileHover={{ scale: 1.15 }}
-        className="group absolute left-1/2 top-[125px] flex -translate-x-1/2 flex-col items-center cursor-grab active:cursor-grabbing focus:outline-none"
+        className="pointer-events-auto group absolute left-1/2 top-[125px] flex -translate-x-1/2 flex-col items-center cursor-grab active:cursor-grabbing focus:outline-none"
         title={theme === "dark" ? "Pull cord to turn on lights" : "Pull cord to turn off lights"}
         aria-label={`Lamp cord switch: currently ${theme} mode. Pull in any direction to interact.`}
       >

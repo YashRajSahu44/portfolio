@@ -14,7 +14,7 @@ export function Navbar() {
       <Link to="/" className="font-display text-2xl italic tracking-tight">
         Yash<span className="text-accent">.</span>
       </Link>
-      <nav className="hidden items-center gap-7 md:flex">
+      <nav className="hidden items-center gap-7 md:mr-12 md:flex">
         {links.map((l) => (
           <Link
             key={l.to}
@@ -32,7 +32,7 @@ export function Navbar() {
 
 export function MobileNav() {
   return (
-    <nav className="flex flex-wrap gap-x-5 gap-y-2 px-8 pb-4 md:hidden">
+    <nav className="flex flex-wrap gap-x-5 gap-y-2 px-8 pb-4 pr-16 md:hidden">
       {links.map((l) => (
         <Link
           key={l.to}
