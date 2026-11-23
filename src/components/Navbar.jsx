@@ -5,7 +5,6 @@ import { useTheme } from "@/lib/theme";
 
 const links = [
   { to: "/projects", label: "Projects" },
-  { to: "/certifications", label: "Certifications" },
   { to: "/experience", label: "Experience" },
   { to: "/skills", label: "Skills" },
   { to: "/contact", label: "Contact" },
